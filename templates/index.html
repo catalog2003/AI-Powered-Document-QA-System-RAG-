@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG QA WebApp</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+<body>
+   <h1 class="mb-4 text-4xl font-extrabold text-center mt-10">AI Document QA System (RAG)</h1>
+ 
+   
+  
+
+   <form action="/" method="post" enctype="multipart/form-data">
+    <div class="w-200 py-9 m-10 bg-gray-50 rounded-2xl border border-gray-300 gap-3 grid border-dashed justify-center items-center mx-auto">
+    <div class="grid gap-1">
+    <div class="mb-3 flex items-center justify-center">
+    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+    <g id="Upload 02">
+    <path id="icon" d="M16.296 25.3935L19.9997 21.6667L23.7034 25.3935M19.9997 35V21.759M10.7404 27.3611H9.855C6.253 27.3611 3.33301 24.4411 3.33301 20.8391C3.33301 17.2371 6.253 14.3171 9.855 14.3171V14.3171C10.344 14.3171 10.736 13.9195 10.7816 13.4326C11.2243 8.70174 15.1824 5 19.9997 5C25.1134 5 29.2589 9.1714 29.2589 14.3171H30.1444C33.7463 14.3171 36.6663 17.2371 36.6663 20.8391C36.6663 24.4411 33.7463 27.3611 30.1444 27.3611H29.2589" stroke="#4F46E5" stroke-width="1.6" stroke-linecap="round" />
+    </g>
+    </svg>
+    </div>
+    </div>
+
+    <div class="grid gap-2">
+      <h2 class="text-center text-gray-900 text-sm font-medium leading-snug"> DOC AND PDF </h2>
+      <div class="flex items-center justify-center">
+        <label class="flex w-28 h-9 px-2 flex-col bg-indigo-600 rounded-full shadow text-white text-xs font-semibold leading-4 items-center justify-center cursor-pointer focus:outline-none">
+          Choose File
+          <input type="file" name="file" required hidden onchange="document.getElementById('upload-btn').disabled = false;">
+        </label>
+      </div>
+      <div class="flex items-center justify-center mt-3">
+        <button id="upload-btn" type="submit" disabled class="bg-green-600 px-4 py-2 rounded-full text-white text-xs font-semibold shadow cursor-pointer">
+          Upload
+        </button>
+      </div>
+      
+    </div>
+    
+  </div>
+</form>
+<form action="/ask" method="post">
+    <div class="flex justify-center items-center my-4">
+  <div class="relative w-250">
+    <textarea type="text" name="question" rows="4" class="block p-2.5 w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 pr-20" placeholder="Enter your question"></textarea>
+    
+    <button type="submit" class="absolute bottom-2 right-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+      Ask
+    </button>
+  </div>
+</div>
+</form>
+
+{% if message %}
+<div class="text-center mt-4 text-sm text-green-600 font-medium">
+  {{ message }}
+</div>
+{% endif %}
+{% if answer %}
+<div class="flex justify-center mt-4">
+  <textarea readonly class="w-full max-w-2xl p-4 text-base text-gray-800 bg-gray-100 rounded-lg border border-gray-300 focus:outline-none resize-y" rows="6">{{ answer }}</textarea>
+</div>
+
+{% endif %}
+
+</body>
+</html>
